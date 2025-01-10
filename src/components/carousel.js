@@ -1,37 +1,58 @@
 import React, { useState, useEffect } from 'react';
 
 const images = [
-  'https://via.placeholder.com/800x300?text=Imagen+1',
-  'https://via.placeholder.com/800x300?text=Imagen+2',
-  'https://via.placeholder.com/800x300?text=Imagen+3'
+  { src: 'https://via.placeholder.com/800x300?text=Imagen+1', info: 'Información de la Imagen 1' },
+  { src: 'https://via.placeholder.com/800x300?text=Imagen+2', info: 'Información de la Imagen 2' },
+  { src: 'https://via.placeholder.com/800x300?text=Imagen+3', info: 'Información de la Imagen 3' }
 ];
 
-const Carousel = () => {
+const Carousel = ({ isModalOpen }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 6000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const handlePrevClick = () => {
+  const handlePrevClick = (e) => {
+    e.stopPropagation();
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = (e) => {
+    e.stopPropagation();
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+  const handleImageClick = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCloseClick = () => {
+    setIsModalVisible(false);
+  };
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
-      <div style={{ width: '800px', height: '300px', overflow: 'hidden', position: 'relative', border: '2px solid #ccc' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '0px', marginBottom: '20px' }}>
+      <div
+        style={{
+          width: '800px',
+          height: '300px',
+          overflow: 'hidden',
+          position: 'relative',
+          border: '2px solid #ccc',
+          cursor: 'pointer'
+        }}
+        onClick={handleImageClick}
+      >
         {images.map((image, index) => (
           <img
             key={index}
-            src={image}
+            src={image.src}
             alt={`Imagen ${index + 1}`}
             style={{
               width: '100%',
@@ -44,9 +65,20 @@ const Carousel = () => {
             }}
           />
         ))}
-        <button onClick={handlePrevClick} style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)', backgroundColor: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', padding: '10px', cursor: 'pointer' }}>Anterior</button>
-        <button onClick={handleNextClick} style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', backgroundColor: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', padding: '10px', cursor: 'pointer' }}>Siguiente</button>
+        <button onClick={handlePrevClick} style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)', backgroundColor: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', padding: '10px', cursor: 'pointer', zIndex: 2 }}>Anterior</button>
+        <button onClick={handleNextClick} style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', backgroundColor: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', padding: '10px', cursor: 'pointer', zIndex: 2 }}>Siguiente</button>
       </div>
+      {isModalVisible && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
+        }}>
+          <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '5px', width: '80%', maxWidth: '500px', textAlign: 'center' }}>
+            <h2>Información de la Imagen</h2>
+            <p>{images[currentIndex].info}</p>
+            <button onClick={handleCloseClick} style={{ padding: '10px 20px', backgroundColor: '#dc3545', color: '#fff', border: 'none', cursor: 'pointer' }}>Cerrar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

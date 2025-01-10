@@ -12,11 +12,11 @@ const Footer = () => {
   };
 
   return (
-    <footer style={{ backgroundColor: '#f8f8f8', padding: '20px', textAlign: 'center', position: 'fixed', bottom: 0, width: '100%' }}>
-      <div style={{ marginBottom: '10px' }}>
-        <a href="#about" onClick={() => handleLinkClick('Acerca de Mascotopia')} style={{ margin: '0 10px' }}>Acerca de Mascotopia</a>
-        <a href="#contact" onClick={() => handleLinkClick('Contacto para Empresas')} style={{ margin: '0 10px' }}>Contacto para Empresas</a>
-        <a href="#terms" onClick={() => handleLinkClick('Términos y Condiciones')} style={{ margin: '0 10px' }}>Términos y Condiciones</a>
+    <footer style={{ backgroundColor: '#f8f8f8', padding: '20px', textAlign: 'center', position: 'relative', width: '100%', marginTop: '20px' }}>
+      <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <a href="#about" onClick={() => handleLinkClick('Acerca de Mascotopia')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Acerca de Mascotopia</a>
+        <a href="#contact" onClick={() => handleLinkClick('Contacto para Empresas')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Contacto para Empresas</a>
+        <a href="#terms" onClick={() => handleLinkClick('Términos y Condiciones')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Términos y Condiciones</a>
       </div>
       <div>
         &copy; {new Date().getFullYear()} Mascotopia. Todos los derechos reservados.
@@ -34,6 +34,18 @@ const Footer = () => {
       )}
     </footer>
   );
+};
+
+const linkStyle = {
+  margin: '0 10px',
+  cursor: 'pointer',
+  textDecoration: 'none',
+  color: 'inherit',
+  transition: 'text-shadow 0.3s ease-in-out',
+};
+
+const linkHoverStyle = {
+  textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
 };
 
 export default Footer;
