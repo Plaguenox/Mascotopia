@@ -1,6 +1,6 @@
 # 🐾 Mascotopia
 
-(./public/images/logo.png)
+./public/images/logo.png
 
 Mascotopia es una plataforma en línea que conecta a proveedores de productos para mascotas con clientes apasionados por sus compañeros peludos. Ofrecemos una amplia gama de productos de diversas marcas y proveedores.
 
