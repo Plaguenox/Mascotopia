@@ -14,16 +14,16 @@ const Footer = () => {
   return (
     <footer style={{ backgroundColor: '#f8f8f8', padding: '20px', textAlign: 'center', position: 'relative', width: '100%', marginTop: '20px' }}>
       <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <a href="#about" onClick={() => handleLinkClick('Acerca de Mascotopia')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Acerca de Mascotopia</a>
-        <a href="#contact" onClick={() => handleLinkClick('Contacto para Empresas')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Contacto para Empresas</a>
-        <a href="#terms" onClick={() => handleLinkClick('Términos y Condiciones')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Términos y Condiciones</a>
+        <a onClick={() => handleLinkClick('Acerca de Mascotopia')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Acerca de Mascotopia</a>
+        <a onClick={() => handleLinkClick('Contacto para Empresas')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Contacto para Empresas</a>
+        <a onClick={() => handleLinkClick('Términos y Condiciones')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Términos y Condiciones</a>
       </div>
       <div>
         &copy; {new Date().getFullYear()} Mascotopia. Todos los derechos reservados.
       </div>
       {modalContent && (
         <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center'
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000
         }}>
           <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '5px', width: '80%', maxWidth: '500px', textAlign: 'center' }}>
             <h2>{modalContent}</h2>
