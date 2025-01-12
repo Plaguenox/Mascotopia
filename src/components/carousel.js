@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const images = [
-  { src: 'https://via.placeholder.com/800x300?text=Imagen+1', info: 'Información de la Imagen 1' },
-  { src: 'https://via.placeholder.com/800x300?text=Imagen+2', info: 'Información de la Imagen 2' },
-  { src: 'https://via.placeholder.com/800x300?text=Imagen+3', info: 'Información de la Imagen 3' }
+  { src: './resources/1.png', info: 'Información de la Imagen 1' },
+  { src: './resources/2.png', info: 'Información de la Imagen 2' },
+  { src: './resources/3.png', info: 'Información de la Imagen 3' }
 ];
 
 const Carousel = () => {
