@@ -40,14 +40,14 @@ const Header = ({ setIsModalOpen }) => {
 
   const buttonStyle = {
     padding: '5px 10px',
-    backgroundColor: '#ff7d96', // Color rosa
-    border: '1px solid #ff7d96', // Color rosa
+    backgroundColor: '#ff7d96',
+    border: '1px solid #ff7d96',
     cursor: 'pointer',
     transition: 'box-shadow 0.3s ease-in-out',
-    fontFamily: 'Itim, cursive', // Tipografía Itim
+    fontFamily: 'Itim, cursive',
     fontSize: '16px',
     color: 'black',
-    borderRadius: '20px', // Bordes redondeados
+    borderRadius: '20px',
   };
 
   const buttonHoverStyle = {
