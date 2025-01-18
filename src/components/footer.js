@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 
 const Footer = () => {
   const [modalContent, setModalContent] = useState(null);
+  const [location, setLocation] = useState(null);
 
-  const handleLinkClick = (content) => {
+  const handleLinkClick = (content, locationInfo) => {
     setModalContent(content);
+    setLocation(locationInfo);
   };
 
   const closeModal = () => {
     setModalContent(null);
+    setLocation(null);
   };
 
   const linkStyle = {
@@ -27,9 +30,27 @@ const Footer = () => {
   return (
     <footer style={{ backgroundColor: '#abd937', padding: '20px', textAlign: 'center', position: 'relative', width: '100%', marginTop: '20px', fontFamily: 'Itim, cursive' }}>
       <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <a onClick={() => handleLinkClick('Acerca de Mascotopia')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Acerca de Mascotopia</a>
-        <a onClick={() => handleLinkClick('Contacto para Empresas')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Contacto para Empresas</a>
-        <a onClick={() => handleLinkClick('Términos y Condiciones')} style={linkStyle} onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} onMouseLeave={e => e.currentTarget.style.textShadow = ''}>Términos y Condiciones</a>
+        <a 
+          onClick={() => handleLinkClick('Acerca de Mascotopia', 'Mascotopia está ubicada en Calle Ejemplo #123, Ciudad Fantástica')} 
+          style={linkStyle} 
+          onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} 
+          onMouseLeave={e => e.currentTarget.style.textShadow = ''}>
+          Acerca de Mascotopia
+        </a>
+        <a 
+          onClick={() => handleLinkClick('Contacto para Empresas', 'Para consultas comerciales, contáctanos en nuestra oficina en Calle Negocios #456, Ciudad Fantástica')} 
+          style={linkStyle} 
+          onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} 
+          onMouseLeave={e => e.currentTarget.style.textShadow = ''}>
+          Contacto para Empresas
+        </a>
+        <a 
+          onClick={() => handleLinkClick('Términos y Condiciones', 'Los términos se aplican a servicios brindados en nuestras oficinas principales en Calle Reglas #789, Ciudad Fantástica')} 
+          style={linkStyle} 
+          onMouseEnter={e => e.currentTarget.style.textShadow = linkHoverStyle.textShadow} 
+          onMouseLeave={e => e.currentTarget.style.textShadow = ''}>
+          Términos y Condiciones
+        </a>
       </div>
       <div>
         &copy; {new Date().getFullYear()} Mascotopia. Todos los derechos reservados.
@@ -41,6 +62,7 @@ const Footer = () => {
           <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '5px', width: '80%', maxWidth: '500px', textAlign: 'center', fontFamily: 'Itim, cursive' }}>
             <h2>{modalContent}</h2>
             <p>{`Información sobre ${modalContent}`}</p>
+            {location && <p><strong>Ubicación:</strong> {location}</p>}
             <button onClick={closeModal} style={{ padding: '10px 20px', backgroundColor: '#ff7d96', color: '#fff', border: 'none', cursor: 'pointer', borderRadius: '20px', fontFamily: 'Itim, cursive', fontSize: '14px', fontWeight: 'bold' }}>Cerrar</button>
           </div>
         </div>

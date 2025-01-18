@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../src/resources/Animation - 1736455585853.json';
+import animationData from './resources/Animation - 1736455585853.json';
 import Header from './components/header';
 import Dropdown from './components/dropdown';
 import Carousel from './components/carousel';
