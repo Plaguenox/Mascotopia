@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 
 const Dropdown = ({ onOptionSelect }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('Alimentos'); // Opción por defecto
 
   const handleOptionClick = (option) => {
-    setSelectedOption(selectedOption === option ? null : option);
-    onOptionSelect(option);
+    if (selectedOption !== option) {
+      setSelectedOption(option);
+      onOptionSelect(option);
+    }
   };
 
   const optionStyle = {
     cursor: 'pointer',
     padding: '10px 20px',
-    backgroundColor: '#abd937',
+    backgroundColor: '#87CEEB', // Color celeste
     color: 'black',
     textAlign: 'center',
     border: '1px solid #ccc',
@@ -20,6 +22,12 @@ const Dropdown = ({ onOptionSelect }) => {
     fontSize: '18px',
     borderRadius: '10px',
     margin: '5px',
+  };
+
+  const selectedOptionStyle = {
+    ...optionStyle,
+    backgroundColor: '#1E90FF', // Color diferente para la opción seleccionada
+    color: 'white',
   };
 
   const optionHoverStyle = {
@@ -31,32 +39,32 @@ const Dropdown = ({ onOptionSelect }) => {
     <div style={{ width: '100%', margin: '20px 0', display: 'flex', justifyContent: 'center' }}>
       <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', maxWidth: '600px' }}>
         <div
+          style={selectedOption === 'Alimentos' ? selectedOptionStyle : optionStyle}
           onClick={() => handleOptionClick('Alimentos')}
-          style={optionStyle}
           onMouseEnter={(e) => { e.currentTarget.style.boxShadow = optionHoverStyle.boxShadow; e.currentTarget.style.transform = optionHoverStyle.transform; }}
           onMouseLeave={(e) => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.transform = ''; }}
         >
           Alimentos
         </div>
         <div
+          style={selectedOption === 'Accesorios' ? selectedOptionStyle : optionStyle}
           onClick={() => handleOptionClick('Accesorios')}
-          style={optionStyle}
           onMouseEnter={(e) => { e.currentTarget.style.boxShadow = optionHoverStyle.boxShadow; e.currentTarget.style.transform = optionHoverStyle.transform; }}
           onMouseLeave={(e) => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.transform = ''; }}
         >
           Accesorios
         </div>
         <div
+          style={selectedOption === 'Juguetes' ? selectedOptionStyle : optionStyle}
           onClick={() => handleOptionClick('Juguetes')}
-          style={optionStyle}
           onMouseEnter={(e) => { e.currentTarget.style.boxShadow = optionHoverStyle.boxShadow; e.currentTarget.style.transform = optionHoverStyle.transform; }}
           onMouseLeave={(e) => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.transform = ''; }}
         >
           Juguetes
         </div>
         <div
+          style={selectedOption === 'Otros' ? selectedOptionStyle : optionStyle}
           onClick={() => handleOptionClick('Otros')}
-          style={optionStyle}
           onMouseEnter={(e) => { e.currentTarget.style.boxShadow = optionHoverStyle.boxShadow; e.currentTarget.style.transform = optionHoverStyle.transform; }}
           onMouseLeave={(e) => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.transform = ''; }}
         >

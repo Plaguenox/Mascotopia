@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.12.1",
+    "chart.js": "^4.4.7",
     "cra-template": "1.2.0",
+    "lottie": "^0.0.1",
     "lottie-web": "^5.12.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

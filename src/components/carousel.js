@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 const images = [
   { src: '/resources/1.png', info: 'Información de la Imagen 1' },
   { src: '/resources/2.png', info: 'Información de la Imagen 2' },
-  { src: '/resources/3.png', info: 'Información de la Imagen 3' }
+  { src: '/resources/3.png', info: 'Información de la Imagen 3' },
+  { src: '/resources/4.png', info: 'Información de la Imagen 4' },
 ];
 
 const Carousel = () => {
@@ -43,7 +44,7 @@ const Carousel = () => {
         <div
           style={{
             width: '800px',
-            height: '300px',
+            height: '220px',
             overflow: 'hidden',
             position: 'relative',
             border: '2px solid #ccc',
@@ -63,7 +64,8 @@ const Carousel = () => {
                 top: 0,
                 left: 0,
                 opacity: currentIndex === index ? 1 : 0,
-                transition: 'opacity 1s ease-in-out'
+                transition: 'opacity 1s ease-in-out',
+                objectFit: 'fill'
               }}
             />
           ))}

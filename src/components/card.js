@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ProductCard = ({ image, brand, productName, price }) => {
+const ProductCard = ({ brand, productName, price, imageUrl }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedWeight, setSelectedWeight] = useState('1 Kg');
 
@@ -28,10 +28,6 @@ const ProductCard = ({ image, brand, productName, price }) => {
   const selectedButtonStyle = {
     ...buttonStyle,
     backgroundColor: '#1E90FF',
-    border: '1px solid #1E90FF',
-  };
-
-  const buttonHoverStyle = {
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
   };
 
@@ -50,40 +46,40 @@ const ProductCard = ({ image, brand, productName, price }) => {
       }}
     >
       <img
-        src="/resources/6.png"
+        src={imageUrl}
         alt={productName}
         style={{ width: '100%', height: 'auto' }}
       />
       <h3 style={{ fontFamily: 'Itim, cursive' }}>{brand}</h3>
       <h4 style={{ fontFamily: 'Itim, cursive' }}>{productName}</h4>
+      <p style={{ fontFamily: 'Itim, cursive' }}>Precio: ${price}</p>
       <div style={{ margin: '10px 0' }}>
         <button
           onClick={() => handleWeightChange('1 Kg')}
           style={selectedWeight === '1 Kg' ? selectedButtonStyle : buttonStyle}
-          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow)}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)')}
           onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '')}
         >
           1 Kg
         </button>
         <button
+          onClick={() => handleWeightChange('2 Kg')}
+          style={selectedWeight === '2 Kg' ? selectedButtonStyle : buttonStyle}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)')}
+          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '')}
+        >
+          2 Kg
+        </button>
+        <button
           onClick={() => handleWeightChange('5 Kg')}
           style={selectedWeight === '5 Kg' ? selectedButtonStyle : buttonStyle}
-          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow)}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)')}
           onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '')}
         >
           5 Kg
         </button>
-        <button
-          onClick={() => handleWeightChange('10 Kg')}
-          style={selectedWeight === '10 Kg' ? selectedButtonStyle : buttonStyle}
-          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow)}
-          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '')}
-        >
-          10 Kg
-        </button>
       </div>
-      <h4 style={{ fontFamily: 'Itim, cursive' }}>{price}</h4>
-      <div style={{ margin: '10px 0' }}>
+      <div>
         <button
           onClick={() => handleQuantityChange(-1)}
           style={{
@@ -119,12 +115,14 @@ const ProductCard = ({ image, brand, productName, price }) => {
           transition: 'box-shadow 0.3s ease-in-out',
           borderRadius: '10px',
           fontFamily: 'Itim, cursive',
+          fontWeight: 'bold',
           color: '#fff',
+          border: 'none',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow)}
+        onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)')}
         onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '')}
       >
-        Agregar al Carrito
+        Añadir al carrito
       </button>
     </div>
   );
