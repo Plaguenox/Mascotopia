@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const images = [
-  { src: '/resources/ofe1.png', info: 'Información de la Imagen 1' },
-  { src: '/resources/ofe2.png', info: 'Información de la Imagen 2' },
-  { src: '/resources/ofe3.png', info: 'Información de la Imagen 3' },
+  { src: '/resources/ofe1.webp', info: 'Información de la Imagen 1' },
+  { src: '/resources/ofe2.webp', info: 'Información de la Imagen 2' },
+  { src: '/resources/ofe3.webp', info: 'Información de la Imagen 3' },
 ];
 
 const Carousel = () => {
@@ -29,7 +29,7 @@ const Carousel = () => {
 
   return (
     <div style={{ width: '100%', textAlign: 'center', marginBottom: '20px' }}>
-      <h2 style={{ fontSize: '30px', fontFamily: 'Itim, cursive', color: '#4A4A4A' }}>Nuestros Productos</h2>
+      <h2 style={{ fontSize: '40px', fontFamily: 'Itim, cursive', color: '#4A4A4A', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Nuestros Productos</h2>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px', marginBottom: '20px' }}>
         <div
           style={{
@@ -37,7 +37,6 @@ const Carousel = () => {
             height: '500px',
             overflow: 'hidden',
             position: 'relative',
-            border: '2px solid #ccc',
             cursor: 'pointer',
             borderRadius: '10px',
           }}

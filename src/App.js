@@ -1,18 +1,34 @@
+import './App.css';
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import animationData from './resources/Animation - 1736455585853.json';
-import Header from './components/header';
-import Carousel from './components/carousel';
-import Footer from './components/footer';
+import Home from './pages/home';
+import Products from './pages/products';
+import Register from './pages/register';
+import Profile from './pages/profile';
+import Login from './components/login';
+import Ubication from './pages/ubication';
+import Fact from './pages/fact';
+import Visits from './pages/visits';
+import Chatbot from './components/chatbot';
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({
+    nombre: '',
+    correo_electronico: '',
+    direccion: '',
+    telefono: '',
+  });
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   const defaultOptions = {
@@ -24,23 +40,43 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserData({
+      nombre: '',
+      correo_electronico: '',
+      direccion: '',
+      telefono: '',
+    });
+  };
+
   return (
-    <div>
-      {isLoading && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
-        }}>
-          <Lottie options={defaultOptions} height={300} width={300} />
-        </div>
-      )}
-      {!isLoading && (
-        <>
-          <Header setIsModalOpen={setIsModalOpen} />
-          <Carousel />
-          <Footer style={{ flexShrink: 0 }} />
-        </>
-      )}
-    </div>
+    <Router>
+      <div>
+        {isLoading ? (
+          <div style={{
+            position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
+          }}>
+            <Lottie options={defaultOptions} height={300} width={300} />
+          </div>
+        ) : (
+          <>
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/products" element={<Products setCart={setCart} />} />
+              <Route path="/register" element={<Register setUserData={setUserData} />} />
+              <Route path="/profile" element={<Profile userData={userData} handleLogout={handleLogout} />} />
+              <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />} />
+              <Route path="/ubication" element={<Ubication />} />
+              <Route path="/fact" element={<Fact cart={cart} />} />
+              <Route path="/visits" element={<Visits />} />
+            </Routes>
+            <Chatbot />
+          </>
+        )}
+      </div>
+    </Router>
   );
 }
 
