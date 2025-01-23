@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
 import animationData from './resources/Animation - 1736455585853.json';
 import Header from './components/header';
-import Dropdown from './components/dropdown';
 import Carousel from './components/carousel';
-import ProductCard from './components/card';
 import Footer from './components/footer';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedOption, setSelectedOption] = useState('Alimentos'); 
 
   useEffect(() => {
     setTimeout(() => {
@@ -27,10 +24,6 @@ function App() {
     }
   };
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
-
   return (
     <div>
       {isLoading && (
@@ -43,16 +36,7 @@ function App() {
       {!isLoading && (
         <>
           <Header setIsModalOpen={setIsModalOpen} />
-          <Dropdown onOptionSelect={handleOptionSelect} />
           <Carousel />
-          <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', flex: '1 0 auto' }}>
-            <div style={{ width: '100%', textAlign: 'left', padding: '10px' }}>
-              <h2 style={{fontSize: '20px'}}>{selectedOption}</h2>
-            </div>
-            <ProductCard imageUrl="/resources/5.png" brand="Marca 1" productName="Producto 1" price="$10" />
-            <ProductCard imageUrl="/resources/6.png" brand="Marca 2" productName="Producto 2" price="$20" />
-            <ProductCard imageUrl="/resources/7.png" brand="Marca 3" productName="Producto 3" price="$30" />
-          </div>
           <Footer style={{ flexShrink: 0 }} />
         </>
       )}
