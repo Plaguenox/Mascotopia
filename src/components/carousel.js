@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import ofe1 from '../assets/contenido/carrusel/ofe1.webp';
+import ofe2 from '../assets/contenido/carrusel/ofe2.webp';
+import ofe3 from '../assets/contenido/carrusel/ofe3.webp';
 
 const images = [
-  { src: '/resources/ofe1.webp', info: 'Información de la Imagen 1' },
-  { src: '/resources/ofe2.webp', info: 'Información de la Imagen 2' },
-  { src: '/resources/ofe3.webp', info: 'Información de la Imagen 3' },
+  { src: ofe1, info: 'Información de la Imagen 1' },
+  { src: ofe2, info: 'Información de la Imagen 2' },
+  { src: ofe3, info: 'Información de la Imagen 3' },
 ];
 
 const Carousel = () => {
@@ -12,33 +15,26 @@ const Carousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+    }, 9000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const handlePrevClick = (e) => {
-    e.stopPropagation();
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
-
-  const handleNextClick = (e) => {
-    e.stopPropagation();
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  const handleIndicatorClick = (index) => {
+    setCurrentIndex(index);
   };
 
   return (
     <div style={{ width: '100%', textAlign: 'center', marginBottom: '20px' }}>
-      <h2 style={{ fontSize: '40px', fontFamily: 'Itim, cursive', color: '#4A4A4A', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Nuestros Productos</h2>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '0', marginBottom: '0' }}>
         <div
           style={{
-            width: '80%',
+            width: '100%',
             height: '500px',
             overflow: 'hidden',
             position: 'relative',
             cursor: 'pointer',
-            borderRadius: '10px',
+            borderRadius: '0',
           }}
         >
           {images.map((image, index) => (
@@ -54,12 +50,25 @@ const Carousel = () => {
                 left: 0,
                 opacity: currentIndex === index ? 1 : 0,
                 transition: 'opacity 1s ease-in-out',
-                objectFit: 'contain',
+                objectFit: 'fill',
               }}
             />
           ))}
-          <button onClick={handlePrevClick} style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)', backgroundColor: '#1E90FF', color: 'white', border: 'none', padding: '10px', cursor: 'pointer', zIndex: 1, borderRadius: '50%' }}>Anterior</button>
-          <button onClick={handleNextClick} style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', backgroundColor: '#1E90FF', color: 'white', border: 'none', padding: '10px', cursor: 'pointer', zIndex: 1, borderRadius: '50%' }}>Siguiente</button>
+          <div style={{ position: 'absolute', bottom: '10px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '5px' }}>
+            {images.map((_, index) => (
+              <span
+                key={index}
+                onClick={() => handleIndicatorClick(index)}
+                style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  backgroundColor: currentIndex === index ? '#1E90FF' : '#FFFFFF',
+                  cursor: 'pointer',
+                }}
+              ></span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

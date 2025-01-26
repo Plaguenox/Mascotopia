@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaHome, FaPaw, FaUser, FaSearch } from 'react-icons/fa';
-import logo from '../resources/logo.png';
+import logo from '../assets/contenido/logos/logopagina.png';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {

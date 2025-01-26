@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import { jsPDF } from 'jspdf';
-import logo from '../resources/logo.png';
+// Eliminar la importación del logo
+// import logo from '../assets/contenido/logo/logopagina.svg';
 
 const FactPage = () => {
   const [cart, setCart] = useState([]);
@@ -31,7 +32,8 @@ const FactPage = () => {
 
   const handlePrint = () => {
     const doc = new jsPDF();
-    doc.addImage(logo, 'PNG', 10, 10, 50, 50);
+    // Eliminar la línea que agrega la imagen del logo
+    // doc.addImage(logo, 'SVG', 10, 10, 50, 50);
     doc.setFontSize(20);
     doc.text('Factura', 105, 30, null, null, 'center');
     doc.setFontSize(12);
@@ -53,7 +55,8 @@ const FactPage = () => {
     <div>
       <Header />
       <div className="fact-container" style={styles.factContainer}>
-        <img src={logo} alt="Mascotopia Logo" style={styles.logo} />
+        {/* Eliminar la imagen del logo */}
+        {/* <img src={logo} alt="Mascotopia Logo" style={styles.logo} /> */}
         <h2 style={styles.title}>Factura</h2>
         <p style={styles.date}>Fecha: {new Date().toLocaleDateString()}</p>
         <div style={styles.products}>
@@ -87,10 +90,11 @@ const styles = {
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
   },
-  logo: {
-    width: '100px',
-    marginBottom: '20px',
-  },
+  // Eliminar el estilo del logo
+  // logo: {
+  //   width: '100px',
+  //   marginBottom: '20px',
+  // },
   title: {
     fontSize: '28px',
     fontWeight: 'bold',

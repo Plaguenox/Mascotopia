@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Lottie from 'react-lottie';
-import animationData from './resources/Animation - 1736455585853.json';
+import animationData from './assets/contenido/splash/Animation - 1736455585853.json';
 import Home from './pages/home';
 import Products from './pages/products';
 import Register from './pages/register';
@@ -11,7 +11,6 @@ import Login from './components/login';
 import Ubication from './pages/ubication';
 import Fact from './pages/fact';
 import Visits from './pages/visits';
-import Chatbot from './components/chatbot';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -72,7 +71,6 @@ function App() {
               <Route path="/fact" element={<Fact cart={cart} />} />
               <Route path="/visits" element={<Visits />} />
             </Routes>
-            <Chatbot />
           </>
         )}
       </div>
