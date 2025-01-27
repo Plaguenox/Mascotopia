@@ -7,7 +7,7 @@ import Home from './pages/home';
 import Products from './pages/products';
 import Register from './pages/register';
 import Profile from './pages/profile';
-import Login from './components/login';
+import LoginPage from './pages/login';
 import Ubication from './pages/ubication';
 import Fact from './pages/fact';
 import Visits from './pages/visits';
@@ -39,16 +39,6 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUserData({
-      nombre: '',
-      correo_electronico: '',
-      direccion: '',
-      telefono: '',
-    });
-  };
-
   return (
     <Router>
       <div>
@@ -65,8 +55,8 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products setCart={setCart} />} />
               <Route path="/register" element={<Register setUserData={setUserData} />} />
-              <Route path="/profile" element={<Profile userData={userData} handleLogout={handleLogout} />} />
-              <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />} />
+              <Route path="/profile" element={<Profile userData={userData} />} />
+              <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />} /> {/* Usar LoginPage */}
               <Route path="/ubication" element={<Ubication />} />
               <Route path="/fact" element={<Fact cart={cart} />} />
               <Route path="/visits" element={<Visits />} />

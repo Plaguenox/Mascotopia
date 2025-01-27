@@ -4,7 +4,7 @@ const MapComponent = () => {
   return (
     <div className="map-container" style={styles.mapContainer}>
       <iframe
-        src="https://www.google.com/maps/d/u/0/embed?mid=161ONCzAMMb0ApdbkKicVvUBHMpmIpio&ehbc=2E312F"
+        src="https://www.google.com/maps/d/u/0/embed?mid=1cuWzCiI1YlNAdYnZW6MQjn-8swQQNJY&ehbc=2E312F"
         title="Mapa personalizado"
         className="map-iframe"
         style={styles.mapIframe}

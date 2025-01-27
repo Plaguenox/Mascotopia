@@ -4,9 +4,32 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import { useNavigate } from 'react-router-dom';
 
+// Importar las imágenes de productos
+import pro1 from '../assets/contenido/productos/pro1.jpeg';
+import pro2 from '../assets/contenido/productos/pro2.jpeg';
+import pro3 from '../assets/contenido/productos/pro3.jpeg';
+import pro4 from '../assets/contenido/productos/pro4.jpeg';
+import pro5 from '../assets/contenido/productos/pro5.jpeg';
+import pro6 from '../assets/contenido/productos/pro6.jpeg';
+import pro7 from '../assets/contenido/productos/pro7.jpeg';
+import pro8 from '../assets/contenido/productos/pro8.jpeg';
+import pro9 from '../assets/contenido/productos/pro9.jpeg';
+import pro10 from '../assets/contenido/productos/pro10.jpeg';
+import pro11 from '../assets/contenido/productos/pro11.jpeg';
+import pro12 from '../assets/contenido/productos/pro12.jpeg';
+import pro13 from '../assets/contenido/productos/pro13.jpeg';
+import pro14 from '../assets/contenido/productos/pro14.jpeg';
+import pro15 from '../assets/contenido/productos/pro15.webp';
+import pro16 from '../assets/contenido/productos/pro16.webp';
+
+const productImages = [
+  pro1, pro2, pro3, pro4, pro5, pro6, pro7, pro8,
+  pro9, pro10, pro11, pro12, pro13, pro14, pro15, pro16
+];
+
 const products = Array.from({ length: 16 }, (_, index) => ({
   id: index + 1,
-  image: `/resources/product${(index % 3) + 1}.jpg`,
+  image: productImages[index],
   price: (Math.random() * 100).toFixed(2),
 }));
 
@@ -50,6 +73,7 @@ const ProductsPage = () => {
             image={product.image}
             price={product.price}
             onAddToCart={() => handleAddToCart(product)}
+            style={styles.productImage} // Asignar estilo a la imagen del producto
           />
         ))}
       </div>
@@ -75,6 +99,11 @@ const styles = {
     gridTemplateColumns: 'repeat(4, 1fr)',
     gap: '16px',
     padding: '16px',
+  },
+  productImage: {
+    width: '100%',
+    height: '200px',
+    objectFit: 'cover',
   },
   modalOverlay: {
     position: 'fixed',

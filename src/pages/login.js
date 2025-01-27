@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import Register from '../components/register';
+import Login from '../components/login';
 
-const RegisterPage = ({ setUserData, setIsLoggedIn }) => {
+const LoginPage = ({ setUserData, setIsLoggedIn }) => {
   const [isLoggedIn, setIsLoggedInState] = useState(false);
 
   return (
     <div>
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedInState} />
-      <div className="register-container" style={styles.registerContainer}>
-        <Register setUserData={setUserData} setIsLoggedIn={setIsLoggedInState} />
+      <div className="login-container" style={styles.loginContainer}>
+        <Login setUserData={setUserData} setIsLoggedIn={setIsLoggedInState} />
       </div>
       <Footer />
     </div>
@@ -18,7 +18,7 @@ const RegisterPage = ({ setUserData, setIsLoggedIn }) => {
 };
 
 const styles = {
-  registerContainer: {
+  loginContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,4 +27,4 @@ const styles = {
   },
 };
 
-export default RegisterPage;
+export default LoginPage;

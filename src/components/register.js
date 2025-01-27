@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
-import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaLock, FaHome, FaPhone } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const Login = ({ setIsLoggedIn, setUserData }) => {
+const Register = ({ setUserData, setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const handleLogin = () => {
-    // Lógica de inicio de sesión
+  const handleRegister = () => {
+    // Lógica de registro de usuario
     setIsLoggedIn(true);
     setUserData({
-      nombre: 'Usuario',
+      nombre: name,
       correo_electronico: email,
-      direccion: 'Dirección de ejemplo',
-      telefono: '123456789',
+      direccion: address,
+      telefono: phone,
     });
   };
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>Login</h2>
+      <h2 style={styles.title}>Registro</h2>
+      <div style={styles.inputGroup}>
+        <FaUser style={styles.icon} />
+        <input
+          type="text"
+          placeholder="Nombre"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={styles.input}
+        />
+      </div>
       <div style={styles.inputGroup}>
         <FaEnvelope style={styles.icon} />
         <input
@@ -40,9 +53,29 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
           style={styles.input}
         />
       </div>
-      <button onClick={handleLogin} style={styles.button}>Iniciar sesión</button>
+      <div style={styles.inputGroup}>
+        <FaHome style={styles.icon} />
+        <input
+          type="text"
+          placeholder="Dirección"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          style={styles.input}
+        />
+      </div>
+      <div style={styles.inputGroup}>
+        <FaPhone style={styles.icon} />
+        <input
+          type="text"
+          placeholder="Teléfono"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          style={styles.input}
+        />
+      </div>
+      <button onClick={handleRegister} style={styles.button}>Registrarse</button>
       <p style={styles.linkText}>
-        ¿No tienes una cuenta? <Link to="/register" style={styles.link}>Regístrate aquí</Link>
+        ¿Ya tienes una cuenta? <Link to="/login" style={styles.link}>Inicia sesión aquí</Link>
       </p>
     </div>
   );
@@ -100,4 +133,4 @@ const styles = {
   },
 };
 
-export default Login;
+export default Register;

@@ -21,7 +21,8 @@ const styles = {
   },
   image: {
     width: '100%',
-    height: 'auto',
+    height: '200px', // Asignar un tamaño específico
+    objectFit: 'fill',
     borderRadius: '8px',
   },
   price: {
