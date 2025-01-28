@@ -1,35 +1,60 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FaUser, FaEnvelope, FaLock, FaHome, FaPhone } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = ({ setUserData, setIsLoggedIn }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
+  const [formData, setFormData] = useState({
+    nombre: '',
+    contraseña: '',
+    correo_electronico: '',
+    direccion: '',
+    telefono: '',
+    rol: 'cliente',
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleRegister = () => {
-    // Lógica de registro de usuario
-    setIsLoggedIn(true);
-    setUserData({
-      nombre: name,
-      correo_electronico: email,
-      direccion: address,
-      telefono: phone,
+  axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
   };
 
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const response = await axios.post('/register', formData);
+      localStorage.setItem('token', response.data.token);
+      setUserData(response.data.user);
+      setIsLoggedIn(true);
+      navigate('/perfil');
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setError(error.response.data.message || 'Error durante el registro');
+      } else {
+        setError('Error durante el registro');
+      }
+      console.error('Error durante el registro:', error);
+    }
+  };
+
   return (
-    <div style={styles.container}>
+    <form onSubmit={handleRegister} style={styles.container}>
       <h2 style={styles.title}>Registro</h2>
+      {error && <p style={styles.error}>{error}</p>}
       <div style={styles.inputGroup}>
         <FaUser style={styles.icon} />
         <input
           type="text"
+          name="nombre"
           placeholder="Nombre"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={formData.nombre}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
@@ -37,9 +62,10 @@ const Register = ({ setUserData, setIsLoggedIn }) => {
         <FaEnvelope style={styles.icon} />
         <input
           type="email"
+          name="correo_electronico"
           placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.correo_electronico}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
@@ -47,9 +73,10 @@ const Register = ({ setUserData, setIsLoggedIn }) => {
         <FaLock style={styles.icon} />
         <input
           type="password"
+          name="contraseña"
           placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.contraseña}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
@@ -57,9 +84,10 @@ const Register = ({ setUserData, setIsLoggedIn }) => {
         <FaHome style={styles.icon} />
         <input
           type="text"
+          name="direccion"
           placeholder="Dirección"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          value={formData.direccion}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
@@ -67,17 +95,18 @@ const Register = ({ setUserData, setIsLoggedIn }) => {
         <FaPhone style={styles.icon} />
         <input
           type="text"
+          name="telefono"
           placeholder="Teléfono"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          value={formData.telefono}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
-      <button onClick={handleRegister} style={styles.button}>Registrarse</button>
+      <button type="submit" style={styles.button}>Registrarse</button>
       <p style={styles.linkText}>
         ¿Ya tienes una cuenta? <Link to="/login" style={styles.link}>Inicia sesión aquí</Link>
       </p>
-    </div>
+    </form>
   );
 };
 
@@ -130,6 +159,10 @@ const styles = {
   link: {
     color: '#007bff',
     textDecoration: 'none',
+  },
+  error: {
+    color: 'red',
+    marginBottom: '10px',
   },
 };
 

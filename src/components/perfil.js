@@ -1,12 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Perfil = ({ userData, handleLogout }) => {
+const Perfil = ({ userData, setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    handleLogout();
-    navigate('/register');
+    localStorage.removeItem('token');
+    if (typeof setIsLoggedIn === 'function') {
+      setIsLoggedIn(false);
+    }
+    navigate('/home');
   };
 
   return (

@@ -11,6 +11,16 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     setLoggedIn(isLoggedIn);
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLoggedIn(true);
+      if (typeof setIsLoggedIn === 'function') {
+        setIsLoggedIn(true);
+      }
+    }
+  }, [setIsLoggedIn]);
+
   const handleHomeClick = () => {
     navigate('/home');
   };
@@ -40,12 +50,22 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         <button onClick={handleProductsClick} className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-full mr-6 transition-transform duration-300 hover:scale-105 hover:neon-border font-itim">
           <FaPaw className="mr-2" /> Productos
         </button>
-        <button onClick={handleProfileClick} className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-full mr-6 transition-transform duration-300 hover:scale-105 hover:neon-border font-itim">
-          <FaUser className="mr-2" /> {loggedIn ? 'Mi Cuenta' : 'Registro'}
-        </button>
-        <button className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-full mr-6 transition-transform duration-300 hover:scale-105 hover:neon-border font-itim">
-          <FaSearch className="mr-2" /> Búsqueda
-        </button>
+        {loggedIn ? (
+          <>
+            <button onClick={handleProfileClick} className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-full mr-6 transition-transform duration-300 hover:scale-105 hover:neon-border font-itim">
+              <FaUser className="mr-2" /> Mi Cuenta
+            </button>
+          </>
+        ) : (
+          <>
+            <button onClick={handleProfileClick} className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-full mr-6 transition-transform duration-300 hover:scale-105 hover:neon-border font-itim">
+              <FaUser className="mr-2" /> Registro
+            </button>
+            <button className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-full mr-6 transition-transform duration-300 hover:scale-105 hover:neon-border font-itim">
+              <FaSearch className="mr-2" /> Búsqueda
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

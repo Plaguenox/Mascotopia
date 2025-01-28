@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Login from '../components/login';
 
 const LoginPage = ({ setUserData, setIsLoggedIn }) => {
   const [isLoggedIn, setIsLoggedInState] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedInState(true);
+      navigate('/home');
+    }
+  }, [navigate]);
 
   return (
     <div>

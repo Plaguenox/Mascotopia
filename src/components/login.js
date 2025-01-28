@@ -1,50 +1,69 @@
 import React, { useState } from 'react';
-import { FaEnvelope, FaLock } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setIsLoggedIn, setUserData }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ setUserData, setIsLoggedIn }) => {
+  const [formData, setFormData] = useState({
+    correo_electronico: '',
+    contraseña: '',
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Lógica de inicio de sesión
-    setIsLoggedIn(true);
-    setUserData({
-      nombre: 'Usuario',
-      correo_electronico: email,
-      direccion: 'Dirección de ejemplo',
-      telefono: '123456789',
+  axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const response = await axios.post('/login', formData);
+      localStorage.setItem('token', response.data.token);
+      setUserData(response.data.user);
+      setIsLoggedIn(true);
+      navigate('/profile');
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setError(error.response.data.message || 'Error durante el inicio de sesión');
+      } else {
+        setError('Error durante el inicio de sesión');
+      }
+      console.error('Error durante el inicio de sesión:', error);
+    }
+  };
+
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Login</h2>
+    <form onSubmit={handleLogin} style={styles.container}>
+      <h2 style={styles.title}>Iniciar Sesión</h2>
+      {error && <p style={styles.error}>{error}</p>}
       <div style={styles.inputGroup}>
-        <FaEnvelope style={styles.icon} />
         <input
           type="email"
+          name="correo_electronico"
           placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.correo_electronico}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
       <div style={styles.inputGroup}>
-        <FaLock style={styles.icon} />
         <input
           type="password"
+          name="contraseña"
           placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.contraseña}
+          onChange={handleChange}
           style={styles.input}
         />
       </div>
-      <button onClick={handleLogin} style={styles.button}>Iniciar sesión</button>
-      <p style={styles.linkText}>
-        ¿No tienes una cuenta? <Link to="/register" style={styles.link}>Regístrate aquí</Link>
-      </p>
-    </div>
+      <button type="submit" style={styles.button}>Iniciar Sesión</button>
+    </form>
   );
 };
 
@@ -69,10 +88,6 @@ const styles = {
     marginBottom: '15px',
     width: '100%',
   },
-  icon: {
-    marginRight: '10px',
-    color: '#888',
-  },
   input: {
     flex: 1,
     padding: '10px',
@@ -89,14 +104,9 @@ const styles = {
     cursor: 'pointer',
     fontSize: '16px',
   },
-  linkText: {
-    marginTop: '10px',
-    fontSize: '14px',
-    color: '#333',
-  },
-  link: {
-    color: '#007bff',
-    textDecoration: 'none',
+  error: {
+    color: 'red',
+    marginBottom: '10px',
   },
 };
 
