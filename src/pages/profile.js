@@ -4,7 +4,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import Perfil from '../components/perfil';
 
-const ProfilePage = ({ userData, setIsLoggedIn }) => {
+const ProfilePage = ({ userData, setUserData, setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const ProfilePage = ({ userData, setIsLoggedIn }) => {
       <Header isLoggedIn={true} setIsLoggedIn={setIsLoggedIn} />
       <div className="profile-container" style={styles.profileContainer}>
         {userData ? (
-          <Perfil userData={userData} setIsLoggedIn={setIsLoggedIn} />
+          <Perfil userData={userData} setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} />
         ) : (
           <p>Cargando datos del perfil...</p>
         )}

@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Perfil = ({ userData, setIsLoggedIn }) => {
+const Perfil = ({ userData, setUserData, setIsLoggedIn }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUserData = localStorage.getItem('userData');
+    
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    } else if (token) {
+      axios.get('/user', { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => {
+          setUserData(response.data);
+          localStorage.setItem('userData', JSON.stringify(response.data));
+        })
+        .catch(error => {
+          console.error('Error al obtener los datos del usuario:', error);
+        });
+    }
+  }, [setUserData]);
 
   const handleLogoutClick = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     if (typeof setIsLoggedIn === 'function') {
       setIsLoggedIn(false);
     }

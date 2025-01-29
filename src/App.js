@@ -6,7 +6,7 @@ import animationData from './assets/contenido/splash/Animation - 1736455585853.j
 import Home from './pages/home';
 import Products from './pages/products';
 import Register from './pages/register';
-import Profile from './pages/profile';
+import ProfilePage from './pages/profile';
 import LoginPage from './pages/login';
 import Ubication from './pages/ubication';
 import Fact from './pages/fact';
@@ -55,7 +55,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products setCart={setCart} />} />
               <Route path="/register" element={<Register setUserData={setUserData} />} />
-              <Route path="/profile" element={<Profile userData={userData} />} />
+              <Route path="/profile" element={<ProfilePage userData={userData} setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} />} /> {/* Usar ProfilePage */}
               <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />} /> {/* Usar LoginPage */}
               <Route path="/ubication" element={<Ubication />} />
               <Route path="/fact" element={<Fact cart={cart} />} />

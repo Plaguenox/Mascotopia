@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = ({ setUserData, setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -24,6 +24,7 @@ const Login = ({ setUserData, setIsLoggedIn }) => {
     setError('');
     try {
       const response = await axios.post('/login', formData);
+      console.log('Datos del usuario:', response.data);
       localStorage.setItem('token', response.data.token);
       setUserData(response.data.user);
       setIsLoggedIn(true);
@@ -63,6 +64,9 @@ const Login = ({ setUserData, setIsLoggedIn }) => {
         />
       </div>
       <button type="submit" style={styles.button}>Iniciar Sesión</button>
+      <p style={styles.linkText}>
+        ¿Aun no tienes cuenta? <Link to="/register" style={styles.link}>Registrate aquí</Link>
+      </p>
     </form>
   );
 };
@@ -107,6 +111,15 @@ const styles = {
   error: {
     color: 'red',
     marginBottom: '10px',
+  },
+  linkText: {
+    marginTop: '15px',
+    fontSize: '14px',
+    color: '#333',
+  },
+  link: {
+    color: '#007bff',
+    textDecoration: 'none',
   },
 };
 

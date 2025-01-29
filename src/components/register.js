@@ -11,6 +11,9 @@ const Register = ({ setUserData, setIsLoggedIn }) => {
     direccion: '',
     telefono: '',
     rol: 'cliente',
+    puede_editar_diseno: false,
+    puede_editar_textos: false,
+    puede_editar_productos: false,
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -32,7 +35,7 @@ const Register = ({ setUserData, setIsLoggedIn }) => {
       localStorage.setItem('token', response.data.token);
       setUserData(response.data.user);
       setIsLoggedIn(true);
-      navigate('/perfil');
+      navigate('/profile');
     } catch (error) {
       if (error.response && error.response.data) {
         setError(error.response.data.message || 'Error durante el registro');
